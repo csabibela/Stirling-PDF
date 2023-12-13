@@ -81,7 +81,7 @@ Feel free to request any features or bug fixes either in github issues or our [D
 - Get all information on a PDF to view or export as JSON. 
 
 
-For a overview of the tasks and the technology each uses please view [groups.md](https://github.com/Frooodle/Stirling-PDF/blob/main/Groups.md)
+For a overview of the tasks and the technology each uses please view [Endpoint-groups.md](https://github.com/Frooodle/Stirling-PDF/blob/main/Endpoint-groups.md)
 Hosted instance/demo of the app can be seen [here](https://pdf.adminforge.de/) hosted by the team at adminforge.de
 
 ## Technologies used
@@ -99,7 +99,7 @@ Hosted instance/demo of the app can be seen [here](https://pdf.adminforge.de/) h
 ### Locally
 Please view https://github.com/Frooodle/Stirling-PDF/blob/main/LocalRunGuide.md
 
-### Docker
+### Docker / Podman
 https://hub.docker.com/r/frooodle/s-pdf
 
 Stirling PDF has 3 different versions, a Full version, Lite, and ultra-Lite. Depending on the types of features you use you may want a smaller image to save on space.
@@ -113,7 +113,7 @@ Docker Run
 ```
 docker run -d \
   -p 8080:8080 \
-  -v /location/of/trainingData:/usr/share/tesseract-ocr/4.00/tessdata \
+  -v /location/of/trainingData:/usr/share/tesseract-ocr/5/tessdata \
   -v /location/of/extraConfigs:/configs \
   -e DOCKER_ENABLE_SECURITY=false \
   --name stirling-pdf \
@@ -133,19 +133,20 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - /location/of/trainingData:/usr/share/tesseract-ocr/4.00/tessdata #Required for extra OCR languages
+      - /location/of/trainingData:/usr/share/tesseract-ocr/5/tessdata #Required for extra OCR languages
       - /location/of/extraConfigs:/configs
 #      - /location/of/customFiles:/customFiles/
     environment:
       - DOCKER_ENABLE_SECURITY=false
 ```
 
+Note: Podman is CLI-compatible with Docker, so simply replace "docker" with "podman".
 
 ## Enable OCR/Compression feature
 Please view https://github.com/Frooodle/Stirling-PDF/blob/main/HowToUseOCR.md
 
 ## Want to add your own language?
-Stirling PDF currently supports 19!
+Stirling PDF currently supports 20!
 - English (English) (en_GB)
 - English (US) (en_US)
 - Arabic (العربية) (ar_AR)
@@ -165,6 +166,7 @@ Stirling PDF currently supports 19!
 - Japanese (日本語) (ja_JP)
 - Dutch (Nederlands) (nl_NL)
 - Greek (el_GR)
+- Turkish (Türkçe) (tr_TR)
 
 If you want to add your own language to Stirling-PDF please refer
 https://github.com/Frooodle/Stirling-PDF/blob/main/HowToAddNewLanguage.md
@@ -219,7 +221,7 @@ metrics:
   enabled: true # 'true' to enable Info APIs endpoints (view http://localhost:8080/swagger-ui/index.html#/API to learn more), 'false' to disable
 ```
 ### Extra notes
-- Endpoints. Currently, the endpoints ENDPOINTS_TO_REMOVE and GROUPS_TO_REMOVE can include comma separate lists of endpoints and groups to disable as example ENDPOINTS_TO_REMOVE=img-to-pdf,remove-pages would disable both image-to-pdf and remove pages, GROUPS_TO_REMOVE=LibreOffice Would disable all things that use LibreOffice. You can see a list of all endpoints and groups [here](https://github.com/Frooodle/Stirling-PDF/blob/main/groups.md) 
+- Endpoints. Currently, the endpoints ENDPOINTS_TO_REMOVE and GROUPS_TO_REMOVE can include comma separate lists of endpoints and groups to disable as example ENDPOINTS_TO_REMOVE=img-to-pdf,remove-pages would disable both image-to-pdf and remove pages, GROUPS_TO_REMOVE=LibreOffice Would disable all things that use LibreOffice. You can see a list of all endpoints and groups [here](https://github.com/Frooodle/Stirling-PDF/blob/main/Endpoint-groups.md) 
 - customStaticFilePath. Customise static files such as the app logo by placing files in the /customFiles/static/ directory. An example of customising app logo is placing a /customFiles/static/favicon.svg to override current SVG. This can be used to change any images/icons/css/fonts/js etc in Stirling-PDF
 
 ### Environment only parameters
